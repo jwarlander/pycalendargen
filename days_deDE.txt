@@ -1,0 +1,4 @@
+Tse	Frühlingsäquinoquium
+Tss	Sommersonnwende
+Tae	Herbstäquinoquium
+Tws	Wintersonnwende
