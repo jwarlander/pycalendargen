@@ -454,7 +454,13 @@ def run(args):
     for spec in fonttable:
         pdfmetrics.registerFont(TTFont(spec[0], spec[1]))
     for font in fontmap:
-        addMapping(font[0], font[1], font[2], font[3])
+        try:
+          addMapping(font[0], font[1], font[2], font[3])
+          print font
+          print "added."
+        except Exception, e:
+          print "Error adding Font:"
+          print e
         
     # Font test page
     if 0:
