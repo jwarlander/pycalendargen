@@ -1,0 +1,384 @@
+# Kvarstår:
+#  Midsommarafton (dagen innan lördagen mellan 20/6 - 26/6)
+#  Midsommardagen (lördagen mellan 20/6 - 26/6)
+#  Alla helgons dag (lördagen mellan 31/10 - 6/11)
+#  Mors dag (sista söndagen i maj)
+#  Fars dag (andra söndagen i november)
+# 
+1.1 	1:Nyårsdagen
+2.1 	Svea
+3.1 	Alfred Alfrida
+4.1 	Rut
+5.1 	Hanna Hannele / 3:Trettondedagsafton
+6.1 	Kasper Melker Baltsar / 1:Trettondedag jul
+7.1 	August Augusta
+8.1 	Erland
+9.1 	Gunnar Gunder
+10.1 	Sigurd Sigbritt
+11.1 	Jan Jannike
+12.1 	Frideborg Fridolf
+13.1 	Knut / 3:Tjugondedag jul
+14.1 	Felix Felicia
+15.1 	Laura Lorentz
+16.1 	Hjalmar Helmer
+17.1 	Anton Tony
+18.1 	Hilda Hildur
+19.1 	Henrik
+20.1 	Fabian Sebastian
+21.1 	Agnes Agneta
+22.1 	Vincent Viktor
+23.1 	Frej Freja
+24.1 	Erika
+25.1 	Paul Pål
+26.1 	Bodil Boel
+27.1 	Göte Göta
+28.1 	Karl Karla / 3:Konungens namnsdag
+29.1 	Diana
+30.1 	Gunilla Gunhild
+31.1 	Ivar Joar
+1.2 	Max Maximilian
+2.2 	3:Kyndelsmässodagen
+3.2 	Disa Hjördis
+4.2 	Ansgar Anselm
+5.2 	Agata Agda
+6.2 	Dorotea Doris
+7.2 	Rikard Dick
+8.2 	Berta Bert / 3:Fettisdagen
+9.2 	Fanny Franciska / 3:Askonsdagen
+10.2 	Iris
+11.2 	Yngve Inge
+12.2 	Evelina Evy
+13.2 	Agne Ove
+14.2 	Valentin / 3:Alla hjärtans dag
+15.2 	Sigfrid
+16.2 	Julia Julius
+17.2 	Alexandra Sandra
+18.2 	Frida Fritiof
+19.2 	Gabriella Ella
+20.2 	Vivianne
+21.2 	Hilding
+22.2 	Pia
+23.2 	Torsten Torun
+24.2 	Mattias Mats
+25.2 	Sigvard Sivert
+26.2 	Torgny Torkel
+27.2 	Lage
+28.2 	Maria
+29.2 	3:Skottdagen
+1.3 	Albin Elvira
+2.3 	Ernst Erna
+3.3 	Gunborg Gunvor
+4.3 	Adrian Adriana
+5.3 	Tora Tove
+6.3 	Ebba Ebbe
+7.3 	Camilla
+8.3 	Siv
+9.3 	Torbjörn Torleif
+10.3 	Edla Ada
+11.3 	Edvin Egon
+12.3 	Viktoria / 3:Kronprinsessans namnsdag
+13.3 	Greger
+14.3 	Matilda Maud
+15.3 	Kristoffer Christel
+16.3 	Herbert Gilbert
+17.3 	Gertrud
+18.3 	Edvard Edmund
+19.3 	Josef Josefina
+20.3 	Joakim Kim
+21.3 	Bengt
+22.3 	Kennet Kent
+23.3 	Gerda Gerd
+24.3 	Gabriel Rafael
+25.3 	3:Marie bebådelsedag
+26.3 	Emanuel
+27.3 	Rudolf Ralf
+28.3 	Malkolm Morgan
+29.3 	Jonas Jens
+30.3 	Holger Holmfrid
+31.3 	Ester
+1.4 	Harald Hervor
+2.4 	Gudmund Ingemund
+3.4 	Ferdinand Nanna
+4.4 	Marianne Marlene
+5.4 	Irene Irja
+6.4 	Vilhelm Helmi
+7.4 	Irma Irmelin
+8.4 	Nadja Tanja
+9.4 	Otto Ottilia
+10.4 	Ingvar Ingvor
+11.4 	Ulf Ylva
+12.4 	Liv
+13.4 	Artur Douglas
+14.4 	Tiburtius
+15.4 	Olivia Oliver
+16.4 	Patrik Patricia
+17.4 	Elias Elis
+18.4 	Valdemar Volmar
+19.4 	Olaus Ola
+20.4 	Amalia Amelie
+21.4 	Anneli Annika
+22.4 	Allan Glenn
+23.4 	Georg Göran
+24.4 	Vega
+25.4 	Markus
+26.4 	Teresia Terese
+27.4 	Engelbrekt
+28.4 	Ture Tyra
+29.4 	Tyko
+30.4 	Mariana / 3:Valborgsmässoafton / 3:Konungens födelsedag
+1.5 	Valborg / 1:Första maj
+2.5 	Filip Filippa
+3.5 	John Jane
+4.5 	Monika Mona
+5.5 	Gotthard Erhard
+6.5 	Marit Rita
+7.5 	Carina Carita
+8.5 	Åke
+9.5 	Reidar Reidun / 3:Europadagen
+10.5 	Esbjörn Styrbjörn
+11.5 	Märta Märit
+12.5 	Charlotta Lotta
+13.5 	Linnea Linn
+14.5 	Halvard Halvar
+15.5 	Sofia Sonja
+16.5 	Ronald Ronny
+17.5 	Rebecka Ruben
+18.5 	Erik
+19.5 	Maj Majken
+20.5 	Karolina Carola
+21.5 	Konstantin Conny
+22.5 	Hemming Henning
+23.5 	Desideria Desirée
+24.5 	Ivan Vanja
+25.5 	Urban
+26.5 	Vilhelmina Vilma
+27.5 	Beda Blenda
+28.5 	Ingeborg Borghild
+29.5 	Yvonne Jeanette
+30.5 	Vera Veronika
+31.5 	Petronella Pernilla
+1.6 	Gun Gunnel
+2.6 	Rutger Roger
+3.6 	Ingemar Gudmar
+4.6 	Solbritt Solveig
+5.6 	Bo
+6.6 	Gustav Gösta / 1:Sveriges nationaldag
+7.6 	Robert Robin
+8.6 	Eivor Majvor
+9.6 	Börje Birger
+10.6 	Svante Boris
+11.6 	Bertil Berthold
+12.6 	Eskil
+13.6 	Aina Aino
+14.6 	Håkan Hakon
+15.6 	Margit Margot
+16.6 	Axel Axelina
+17.6 	Torborg Torvald
+18.6 	Björn Bjarne
+19.6 	Germund Görel
+20.6 	Linda
+21.6 	Alf Alvar
+22.6 	Paulina Paula
+23.6 	Adolf Alice
+24.6 	3:Johannes Döparens dag
+25.6 	David Salomon
+26.6 	Rakel Lea
+27.6 	Selma Fingal
+28.6 	Leo
+29.6 	Peter Petra
+30.6 	Elof Leif
+1.7 	Aron Mirjam
+2.7 	Rosa Rosita
+3.7 	Aurora
+4.7 	Ulrika Ulla
+5.7 	Laila Ritva
+6.7 	Esaias Jessika
+7.7 	Klas
+8.7 	Kjell
+9.7 	Jörgen Örjan
+10.7 	André Andrea
+11.7 	Eleonora Ellinor
+12.7 	Herman Hermine
+13.7 	Joel Judit
+14.7 	Folke / 3:Kronprinsessans födelsedag
+15.7 	Ragnhild Ragnvald
+16.7 	Reinhold Reine
+17.7 	Bruno
+18.7 	Fredrik Fritz
+19.7 	Sara
+20.7 	Margareta Greta
+21.7 	Johanna
+22.7 	Magdalena Madeleine
+23.7 	Emma
+24.7 	Kristina Kerstin
+25.7 	Jakob
+26.7 	Jesper
+27.7 	Marta
+28.7 	Botvid Seved
+29.7 	Olof
+30.7 	Algot
+31.7 	Helena Elin
+1.8 	Per
+2.8 	Karin Kajsa
+3.8 	Tage
+4.8 	Arne Arnold
+5.8 	Ulrik Alrik
+6.8 	Alfons Inez
+7.8 	Dennis Denise
+8.8 	Silvia Sylvia / 3:Drottningens namnsdag
+9.8 	Roland
+10.8 	Lars
+11.8 	Susanna
+12.8 	Klara
+13.8 	Kaj
+14.8 	Uno
+15.8 	Stella Estelle
+16.8 	Brynolf
+17.8 	Verner Valter
+18.8 	Ellen Lena / 3:Surströmmingspremiär
+19.8 	Magnus Måns
+20.8 	Bernhard Bernt
+21.8 	Jon Jonna
+22.8 	Henrietta Henrika
+23.8 	Signe Signhild
+24.8 	Bartolomeus
+25.8 	Lovisa Louise
+26.8 	Östen
+27.8 	Rolf Raoul
+28.8 	Gurli Leila
+29.8 	Hans Hampus
+30.8 	Albert Albertina
+31.8 	Arvid Vidar
+1.9 	Samuel
+2.9 	Justus Justina
+3.9 	Alfhild Alva
+4.9 	Gisela
+5.9 	Adela Heidi
+6.9 	Lilian Lilly
+7.9 	Regina Roy
+8.9 	Alma Hulda
+9.9 	Anita Annette
+10.9 	Tord Turid
+11.9 	Dagny Helny
+12.9 	Åsa Åslög
+13.9 	Sture
+14.9 	Ida
+15.9 	Sigrid Siri
+16.9 	Dag Daga
+17.9 	Hildegard Magnhild
+18.9 	Orvar
+19.9 	Fredrika
+20.9 	Elise Lisa
+21.9 	Matteus
+22.9 	Maurits Moritz
+23.9 	Tekla Tea
+24.9 	Gerhard Gert
+25.9 	Tryggve
+26.9 	Enar Einar
+27.9 	Dagmar Rigmor
+28.9 	Lennart Leonard
+29.9 	Mikael Mikaela
+30.9 	Helge
+1.10 	Ragnar Ragna
+2.10 	Ludvig Love
+3.10 	Evald Osvald
+4.10 	Frans Frank
+5.10 	Bror
+6.10 	Jenny Jennifer
+7.10 	Birgitta Britta
+8.10 	Nils
+9.10 	Ingrid Inger
+10.10 	Harry Harriet
+11.10 	Erling Jarl
+12.10 	Valfrid Manfred
+13.10 	Berit Birgit
+14.10 	Stellan
+15.10 	Hedvig Hillevi
+16.10 	Finn
+17.10 	Antonia Toini
+18.10 	Lukas
+19.10 	Tore Tor
+20.10 	Sibylla
+21.10 	Ursula Yrsa
+22.10 	Marika Marita
+23.10 	Severin Sören
+24.10 	Evert Eilert / 3:FN-dagen
+25.10 	Inga Ingalill
+26.10 	Amanda Rasmus
+27.10 	Sabina
+28.10 	Simon Simone
+29.10 	Viola
+30.10 	Elsa Isabella
+31.10 	Edit Edgar / 3:Halloween
+1.11 	1:Allhelgonadagen
+2.11 	Tobias
+3.11 	Hubert Hugo
+4.11 	Sverker
+5.11 	Eugen Eugenia
+6.11 	Gustav Adolf / 3:Gustav Adolfs-dagen
+7.11 	Ingegerd Ingela
+8.11 	Vendela
+9.11 	Teodor Teodora
+10.11 	Martin Martina
+11.11 	Mårten
+12.11 	Konrad Kurt
+13.11 	Kristian Krister
+14.11 	Emil Emilia
+15.11 	Leopold
+16.11 	Vibeke Viveka
+17.11 	Naemi Naima
+18.11 	Lillemor Moa
+19.11 	Elisabet Lisbet
+20.11 	Pontus Marina
+21.11 	Helga Olga
+22.11 	Cecilia Sissela
+23.11 	Klemens
+24.11 	Gudrun Rune
+25.11 	Katarina Katja
+26.11 	Linus
+27.11 	Astrid Asta
+28.11 	Malte
+29.11 	Sune
+30.11 	Andreas Anders
+1.12 	Oskar Ossian
+2.12 	Beata Beatrice
+3.12 	Lydia
+4.12 	Barbara Barbro
+5.12 	Sven
+6.12 	Nikolaus Niklas
+7.12 	Angela Angelika
+8.12 	Virginia
+9.12 	Anna
+10.12 	Malin Malena / 3:Nobeldagen
+11.12 	Daniel Daniela
+12.12 	Alexander Alexis
+13.12 	Lucia
+14.12 	Sten Sixten
+15.12 	Gottfrid
+16.12 	Assar
+17.12 	Stig
+18.12 	Abraham
+19.12 	Isak
+20.12 	Israel Moses
+21.12 	Tomas
+22.12 	Natanael Jonatan
+23.12 	Adam / 3:Drottningens födelsedag
+24.12 	Eva
+25.12 	1:Juldagen
+26.12 	Stefan Staffan
+27.12 	Johannes Johan
+28.12 	Benjamin / 3:Värnlösa barns dag
+29.12 	Natalia Natalie
+30.12 	Abel Set
+31.12 	Sylvester / 3:Nyårsafton
+E-3	1:Skärtorsdagen
+E-2	1:Långfredagen
+E+0	1:Påskdagen
+E+1	1:Annandag påsk
+E+39	1:Kristi himmelsfärds dag
+E+49	1:Pingstdagen
+E+50	3:Annandag pingst
+Tse	3:Vårdagjämningen
+Tss	3:Sommarsolståndet
+Tae	3:Höstdagjämningen
+Tws	3:Vintersolståndet
