@@ -122,6 +122,7 @@ fontmap = [
 #   for English (American).
 #   0 = Swedish
 #   1 = English (US)
+#   2 = German
 lang = 1
 
 # Page titles
@@ -149,7 +150,7 @@ itemspacing = 2*mm/3 # spacing between item lines, + = closer together
 # Calendar setup
 #
 
-languages = [ 'svSE', 'enUS' ]
+languages = [ 'svSE', 'enUS', 'deDE' ]
 
 months = [
     # Swedish
@@ -158,6 +159,9 @@ months = [
     # English
     [ 'January', 'February', 'March', 'April', 'May', 'June',
       'July', 'August', 'September', 'October', 'November', 'December' ],
+    # German
+    [ 'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni',
+      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember' ]
     ]
 
 weekdays = [
@@ -165,6 +169,8 @@ weekdays = [
     [ 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag', 'Söndag' ],
     # English
     [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ],
+    # German
+    [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ]
     ]
 
 # Match colors to codes used in source code and for special days
