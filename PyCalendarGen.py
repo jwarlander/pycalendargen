@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#   PyCalendarGen.py - Copyright (C) 2005 Johan Wärlander
+#   PyCalendarGen.py - Copyright (C) 2005-2012 Johan Wärlander
 #
 #   This file is part of PyCalendarGen.
 #
@@ -486,7 +486,7 @@ def usage():
     print "              where YYYY is replaced by the year and MM"
     print "              is replaced by the month number."
     print
-    print """PyCalendarGen 0.9.1, Copyright (C) 2005 Johan Wärlander
+    print """PyCalendarGen 0.9.3, Copyright (C) 2005-2012 Johan Wärlander
 PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is
 free software, and you are welcome to redistribute it
 under certain conditions. See the file COPYING for details."""
@@ -528,6 +528,7 @@ def run(args):
     
     # Draw the calendar
     c = Canvas(fname, pagesize=landscape(A4))
+    c.setCreator("PyCalendarGen 0.9.3 - bitbucket.org/jwarlander/pycalendargen")
     year = int(args[1])
     month = args[2]
     if len(month.split('-')) > 1:
