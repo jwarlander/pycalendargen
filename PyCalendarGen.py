@@ -516,6 +516,7 @@ def run(args):
     
     # Draw the calendar
     c = Canvas(fname, pagesize=landscape(A4))
+    c.setCreator("PyCalendarGen 0.9.3 - bitbucket.org/jwarlander/pycalendargen")
     year = int(args[1])
     month = args[2]
     if len(month.split('-')) > 1:
