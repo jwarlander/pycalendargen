@@ -59,6 +59,18 @@
 #        (day_number, day_color, ((item_name, item_color), (item_name, item_color), ..))
 #    - this means renderGrid() will ONLY need to worry about how to -display- the data
 #  o Possibly move day_table functionality directly to data file being loaded
+#  o Command-line option for setting language
+#  o Packages for common Linux distributions
+#  o Allow rendering of single PDF for the full year (or any span of months)
+#  o Integrate rendering of opposite pages with images
+#    - refer to directory, pick image files in alphabetical order
+#    - scale images to full page, optionally with border
+#    - allow for captions, possibly using <image_name>.txt as input
+#  o Improve font handling
+#    - command-line option for selecting font(s)?
+#    - maybe allow for usage of system fonts
+#  o Allow specification of a config file for all rendering options
+#    - language, fonts, images etc..
 #
 # ChangeLog
 # =========
@@ -123,6 +135,7 @@ fontmap = [
 #   0 = Swedish
 #   1 = English (US)
 #   2 = German
+#   3 = Catalan
 lang = 1
 
 # Page titles
@@ -150,7 +163,7 @@ itemspacing = 2*mm/3 # spacing between item lines, + = closer together
 # Calendar setup
 #
 
-languages = [ 'svSE', 'enUS', 'deDE' ]
+languages = [ 'svSE', 'enUS', 'deDE', 'caES' ]
 
 months = [
     # Swedish
@@ -161,7 +174,10 @@ months = [
       'July', 'August', 'September', 'October', 'November', 'December' ],
     # German
     [ 'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni',
-      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember' ]
+      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember' ],
+    # Catalan
+    [ 'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
+      'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre' ],
     ]
 
 weekdays = [
@@ -170,7 +186,9 @@ weekdays = [
     # English
     [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ],
     # German
-    [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ]
+    [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ],
+    # Catalan
+    [ 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte', 'Diumenge' ],
     ]
 
 # Match colors to codes used in source code and for special days
@@ -467,14 +485,15 @@ def usage():
     print "Usage: " + sys.argv[0] + " year month [filename]"
     print "Generate a calendar page in PDF format."
     print
-    print "        year  The year for the calendar page."
-    print "       month  The month you want to generate a page for."
+    print "        year  The 4-digit year for the calendar page, like 2006."
+    print "       month  The number of the month you want to generate a page for,"
+    print "              like 05 for May."
     print "    filename  The name of the PDF file to be written."
     print "              By default, it will be called YYYY-MM.pdf,"
     print "              where YYYY is replaced by the year and MM"
     print "              is replaced by the month number."
     print
-    print """PyCalendarGen 0.9.3, Copyright (C) 2005-2012 Johan Wärlander
+    print """PyCalendarGen 0.9.4, Copyright (C) 2005-2012 Johan Wärlander
 PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is
 free software, and you are welcome to redistribute it
 under certain conditions. See the file COPYING for details."""
@@ -516,7 +535,7 @@ def run(args):
     
     # Draw the calendar
     c = Canvas(fname, pagesize=landscape(A4))
-    c.setCreator("PyCalendarGen 0.9.3 - bitbucket.org/jwarlander/pycalendargen")
+    c.setCreator("PyCalendarGen 0.9.4 - bitbucket.org/jwarlander/pycalendargen")
     year = int(args[1])
     month = args[2]
     if len(month.split('-')) > 1:
