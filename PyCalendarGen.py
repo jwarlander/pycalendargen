@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#   PyCalendarGen.py - Copyright (C) 2005 Johan Wärlander
+#   PyCalendarGen.py - Copyright (C) 2005-2012 Johan Wärlander
 #
 #   This file is part of PyCalendarGen.
 #
@@ -191,6 +191,15 @@ day_table = {
     2007: (21,  3),
     2008: (20,  3),
     2009: (20,  3),
+    2010: (20,  3),
+    2011: (20,  3),
+    2012: (20,  3),
+    2013: (20,  3),
+    2014: (20,  3),
+    2015: (20,  3),
+    2016: (20,  3),
+    2017: (20,  3),
+    2018: (20,  3),
     },
     # Summer Solstice
     "ss": {
@@ -199,6 +208,15 @@ day_table = {
     2007: (21,  6),
     2008: (21,  6),
     2009: (21,  6),
+    2010: (21,  6),
+    2011: (21,  6),
+    2012: (20,  6),
+    2013: (21,  6),
+    2014: (21,  6),
+    2015: (21,  6),
+    2016: (20,  6),
+    2017: (21,  6),
+    2018: (21,  6),
     },
     # Autumn Equinox
     "ae": {
@@ -207,6 +225,15 @@ day_table = {
     2007: (23,  9),
     2008: (22,  9),
     2009: (22,  9),
+    2010: (23,  9),
+    2011: (23,  9),
+    2012: (22,  9),
+    2013: (22,  9),
+    2014: (23,  9),
+    2015: (23,  9),
+    2016: (22,  9),
+    2017: (22,  9),
+    2018: (23,  9),
     },
     # Winter Solstice
     "ws": {
@@ -215,6 +242,15 @@ day_table = {
     2007: (22, 12),
     2008: (21, 12),
     2009: (21, 12),
+    2010: (21, 12),
+    2011: (22, 12),
+    2012: (21, 12),
+    2013: (21, 12),
+    2014: (21, 12),
+    2015: (22, 12),
+    2016: (21, 12),
+    2017: (21, 12),
+    2018: (21, 12),
     },
     }
 
@@ -438,7 +474,7 @@ def usage():
     print "              where YYYY is replaced by the year and MM"
     print "              is replaced by the month number."
     print
-    print """PyCalendarGen 0.9.1, Copyright (C) 2005 Johan Wärlander
+    print """PyCalendarGen 0.9.3, Copyright (C) 2005-2012 Johan Wärlander
 PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is
 free software, and you are welcome to redistribute it
 under certain conditions. See the file COPYING for details."""
@@ -480,6 +516,7 @@ def run(args):
     
     # Draw the calendar
     c = Canvas(fname, pagesize=landscape(A4))
+    c.setCreator("PyCalendarGen 0.9.3 - bitbucket.org/jwarlander/pycalendargen")
     year = int(args[1])
     month = args[2]
     if len(month.split('-')) > 1:
