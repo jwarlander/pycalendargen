@@ -66,6 +66,11 @@
 #    - refer to directory, pick image files in alphabetical order
 #    - scale images to full page, optionally with border
 #    - allow for captions, possibly using <image_name>.txt as input
+#  o Improve font handling
+#    - command-line option for selecting font(s)?
+#    - maybe allow for usage of system fonts
+#  o Allow specification of a config file for all rendering options
+#    - language, fonts, images etc..
 #
 # ChangeLog
 # =========
