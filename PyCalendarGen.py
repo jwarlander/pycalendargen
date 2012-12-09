@@ -135,6 +135,7 @@ fontmap = [
 #   0 = Swedish
 #   1 = English (US)
 #   2 = German
+#   3 = Catalan
 lang = 1
 
 # Page titles
@@ -162,7 +163,7 @@ itemspacing = 2*mm/3 # spacing between item lines, + = closer together
 # Calendar setup
 #
 
-languages = [ 'svSE', 'enUS', 'deDE' ]
+languages = [ 'svSE', 'enUS', 'deDE', 'caES' ]
 
 months = [
     # Swedish
@@ -173,7 +174,10 @@ months = [
       'July', 'August', 'September', 'October', 'November', 'December' ],
     # German
     [ 'Jänner', 'Februar', 'März', 'April', 'Mai', 'Juni',
-      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember' ]
+      'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember' ],
+    # Catalan
+    [ 'Gener', 'Febrer', 'Març', 'Abril', 'Maig', 'Juny',
+      'Juliol', 'Agost', 'Setembre', 'Octubre', 'Novembre', 'Desembre' ],
     ]
 
 weekdays = [
@@ -182,7 +186,9 @@ weekdays = [
     # English
     [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ],
     # German
-    [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ]
+    [ 'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag' ],
+    # Catalan
+    [ 'Dilluns', 'Dimarts', 'Dimecres', 'Dijous', 'Divendres', 'Dissabte', 'Diumenge' ],
     ]
 
 # Match colors to codes used in source code and for special days
@@ -479,8 +485,9 @@ def usage():
     print "Usage: " + sys.argv[0] + " year month [filename]"
     print "Generate a calendar page in PDF format."
     print
-    print "        year  The year for the calendar page."
-    print "       month  The month you want to generate a page for."
+    print "        year  The 4-digit year for the calendar page, like 2006."
+    print "       month  The number of the month you want to generate a page for,"
+    print "              like 05 for May."
     print "    filename  The name of the PDF file to be written."
     print "              By default, it will be called YYYY-MM.pdf,"
     print "              where YYYY is replaced by the year and MM"

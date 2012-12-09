@@ -1,0 +1,27 @@
+31.12	1:Cap d'any
+1.1	1:Cap d'any
+6.1     1:Reis Mags
+23.4    Sant Jordi
+8.5	Dia de la mare
+19.4	Dia del pare
+1.5	1:Dia del treballador
+24.6	1:Sant Joan
+15.8	1:Mare de Déu d'Agost
+11.9    1:Diada Catalunya	
+12.10	1:Mare de Déu del Pilar
+1.11	1:Tots Sants
+6.12	1:Dia de la Constitució
+8.12	1:Immaculada concepció
+25.12	1:Nadal
+26.12	1:Sant Esteve
+28.12   1:Dia dels innocents
+E+0	1:Pàsqua Resurrecció
+E-2	1:Divendres Sant
+E-3	Dijous Sant
+E+1	1:Dilluns de Pàsqua
+E-7	1:Diumenge de Rams
+E+50	Pàsqua Florida
+Tse	Equinocci de primavera
+Tss	Solstici d'estiu
+Tae	Equinocci de tardor
+Tws	Solstici d'hivern
