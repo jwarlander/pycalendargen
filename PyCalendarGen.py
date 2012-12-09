@@ -59,6 +59,13 @@
 #        (day_number, day_color, ((item_name, item_color), (item_name, item_color), ..))
 #    - this means renderGrid() will ONLY need to worry about how to -display- the data
 #  o Possibly move day_table functionality directly to data file being loaded
+#  o Command-line option for setting language
+#  o Packages for common Linux distributions
+#  o Allow rendering of single PDF for the full year (or any span of months)
+#  o Integrate rendering of opposite pages with images
+#    - refer to directory, pick image files in alphabetical order
+#    - scale images to full page, optionally with border
+#    - allow for captions, possibly using <image_name>.txt as input
 #
 # ChangeLog
 # =========
