@@ -71,6 +71,13 @@
 #    - maybe allow for usage of system fonts
 #  o Allow specification of a config file for all rendering options
 #    - language, fonts, images etc..
+#  o Use PyEphem for calculating moon phases, dates for solstice / equinox, etc?
+#    - http://rhodesmill.org/pyephem/index.html
+#  o Make command-line args more sane
+#    - YYYYMM for single month; YYYYMM-YYYYMM for an arbitrary range
+#    - or maybe --from YYYYMM / --to YYYYMM for ranges?
+#  o Add a debug flag
+#    - use for printing font info, it really isn't interesting most of the time
 #
 # ChangeLog
 # =========
