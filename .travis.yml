@@ -3,6 +3,9 @@ python:
   - "3.2"
   - "2.7"
   - "2.6"
+# make sure we have comparepdf available
+before_install:
+ - sudo apt-get install -qq comparepdf
 # command to install depedencies, e.g. pip install -r requirements.txt --use-mirrors
 install: pip install -r requirements.txt
 # command to run tests, e.g. python setup.py test
