@@ -453,6 +453,25 @@ def drawGrid(c, year, month, width, height):
     c.restoreState()
 
 
+# drawCoverPage()
+#
+# Draw the cover page.
+#
+def drawCoverPage(c, filename):
+    width = landscape(A4)[0] - 20*mm
+    height = landscape(A4)[1] - 20*mm
+
+    # leave 1cm margin on page
+    drawable_h = height - titlesize - 5*mm
+
+    # draw image
+    c.drawImage(filename, 10*mm, 10*mm, width=width, height=height,
+                preserveAspectRatio=True)
+
+    # show the page
+    c.showPage()
+
+    
 # drawCalendarPage()
 #
 # Draw the entire calendar page.
@@ -515,6 +534,9 @@ file COPYING for details.''')
     parser.add_argument('filename', type=str, nargs='?',
                         help='The name of the PDF file to be written. By '
                              'default, it will be named like YYYY-MM.pdf.')
+    parser.add_argument('--cover-image', type=str, metavar='FILENAME', nargs='?',
+                        help='Generate a cover page using the specified image.')
+
     args = parser.parse_args()
 
     # Load fonts 
@@ -550,6 +572,8 @@ file COPYING for details.''')
     c.setCreator("PyCalendarGen 0.9.4 - bitbucket.org/jwarlander/pycalendargen")
     year = int(args.year)
     month = args.month
+    if args.cover_image is not None:
+      drawCoverPage(c, args.cover_image)
     if len(month.split('-')) > 1:
         start = int(month.split('-')[0])
         end = int(month.split('-')[1])
