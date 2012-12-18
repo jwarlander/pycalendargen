@@ -81,6 +81,7 @@
 #
 # ChangeLog
 # =========
+import argparse
 import os
 import sys
 import reportlab.pdfgen.canvas
@@ -488,30 +489,34 @@ def drawCalendarPage(c, year, month):
     return
 
 
-def usage():
-    print "Usage: " + sys.argv[0] + " year month [filename]"
-    print "Generate a calendar page in PDF format."
-    print
-    print "        year  The 4-digit year for the calendar page, like 2006."
-    print "       month  The number of the month you want to generate a page for,"
-    print "              like 05 for May."
-    print "    filename  The name of the PDF file to be written."
-    print "              By default, it will be called YYYY-MM.pdf,"
-    print "              where YYYY is replaced by the year and MM"
-    print "              is replaced by the month number."
-    print
-    print """PyCalendarGen 0.9.4, Copyright (C) 2005-2012 Johan Wärlander
-PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is
-free software, and you are welcome to redistribute it
-under certain conditions. See the file COPYING for details."""
-
-    
 def run(args):
 
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
     from reportlab.lib.fonts import addMapping
-   
+
+    # Process args
+    parser = argparse.ArgumentParser(
+      formatter_class=argparse.RawDescriptionHelpFormatter,
+      description='Generate calendar pages in PDF format.',
+      epilog='''PyCalendarGen 0.9.4, Copyright (C) 2005-2012 Johan Wärlander
+PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is free software,
+and you are welcome to redistribute it under certain conditions. See the 
+file COPYING for details.''')
+    parser.add_argument('year', type=str, metavar='YYYY',
+                        help='The 4-digit starting year for the calendar '
+                             'page, like 2012.')
+    parser.add_argument('month', type=str, metavar='MM[-NN]',
+                        help='The number of the month you want to generate '
+                             'a page for, like 05 for May. If of the format '
+                             'MM-NN, it describes a range of up to 12 months. '
+                             'In this case, if NN < MM, it means the calendar '
+                             'wraps into month NN of the next year.')
+    parser.add_argument('filename', type=str, nargs='?',
+                        help='The name of the PDF file to be written. By '
+                             'default, it will be named like YYYY-MM.pdf.')
+    args = parser.parse_args()
+
     # Load fonts 
     for spec in fonttable:
         pdfmetrics.registerFont(TTFont(spec[0], spec[1]))
@@ -534,17 +539,17 @@ def run(args):
             ypos += 24
             c.save()
         
-    # Process args
-    if len(args) == 4:
-        fname = args[3]
+    # Handle filename
+    if args.filename is not None:
+        fname = args.filename
     else:
-        fname = args[1] + '-' + args[2] + '.pdf'
+        fname = args.year + '-' + args.month + '.pdf'
     
     # Draw the calendar
     c = Canvas(fname, pagesize=landscape(A4))
     c.setCreator("PyCalendarGen 0.9.4 - bitbucket.org/jwarlander/pycalendargen")
-    year = int(args[1])
-    month = args[2]
+    year = int(args.year)
+    month = args.month
     if len(month.split('-')) > 1:
         start = int(month.split('-')[0])
         end = int(month.split('-')[1])
@@ -564,8 +569,4 @@ def run(args):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        usage()
-        sys.exit(2)
-        
     run(sys.argv)
