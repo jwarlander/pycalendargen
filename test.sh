@@ -14,10 +14,18 @@ for month in 01 02 03 04 05 06 07 08 09 10 11 12; do
     > /dev/null 2> tmp/2012-${month}.log
   result=$?
   if [ "$result" -eq 0 ]; then
-    echo -n "."
+    metric=$(cat tmp/2012-${month}.log)
+    if [ "$metric" -eq 0 ]; then
+      echo -n "."
+    else
+      echo "F"
+      echo "Files tmp/2012-${month}.pdf and testdata/2012-${month}.pdf don't match:"
+      echo "$metric pixels differ in rendered output"
+      exit 1
+    fi
   else
-    echo "F"
-    echo "* Files tmp/2012-${month}.pdf and testdata/2012-${month}.pdf don't match:"
+    echo "E"
+    echo "Error comparing files tmp/2012-${month}.pdf and testdata/2012-${month}.pdf:"
     cat tmp/2012-${month}.log
     exit $result
   fi
