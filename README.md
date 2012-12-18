@@ -3,6 +3,7 @@ PyCalendarGen 0.9.4
 
 Copyright (C) 2005-2012 Johan Warlander
 
+[![Build Status](https://travis-ci.org/jwarlander/pycalendargen.png)](https://travis-ci.org/jwarlander/pycalendargen)
 
 Purpose
 -------
