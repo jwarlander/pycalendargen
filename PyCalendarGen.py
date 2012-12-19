@@ -594,11 +594,9 @@ file COPYING for details.''')
     # Set up iterator for monthly images
     image_files = []
     if args.monthly_image_dir is not None:
-      print args.monthly_image_dir
       image_dir = args.monthly_image_dir
       image_files = [os.path.join(image_dir, f) for f in os.listdir(image_dir) 
                      if os.path.isfile(os.path.join(image_dir, f))]
-      print image_files
     image_files = itertools.cycle(image_files)
 
     # Draw monthly page(s)
