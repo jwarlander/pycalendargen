@@ -527,7 +527,7 @@ def run(args):
     parser = argparse.ArgumentParser(
       formatter_class=argparse.RawDescriptionHelpFormatter,
       description='Generate calendar pages in PDF format.',
-      epilog='''PyCalendarGen 0.9.4, Copyright (C) 2005-2012 Johan Wärlander
+      epilog='''PyCalendarGen 0.9.5, Copyright (C) 2005-2012 Johan Wärlander
 PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is free software,
 and you are welcome to redistribute it under certain conditions. See the 
 file COPYING for details.''')
@@ -586,7 +586,7 @@ file COPYING for details.''')
 
     # Initialize PDF output
     c = Canvas(fname, pagesize=landscape(A4))
-    c.setCreator("PyCalendarGen 0.9.4 - bitbucket.org/jwarlander/pycalendargen")
+    c.setCreator("PyCalendarGen 0.9.5 - github.com/jwarlander/pycalendargen")
     year = int(args.year)
     month = args.month
 
