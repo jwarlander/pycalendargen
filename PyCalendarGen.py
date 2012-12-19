@@ -82,6 +82,7 @@
 # ChangeLog
 # =========
 import argparse
+import itertools
 import os
 import sys
 import reportlab.pdfgen.canvas
@@ -508,6 +509,14 @@ def drawCalendarPage(c, year, month):
     return
 
 
+def drawMonth(c, year, month, image_files):
+    try:
+        image_file = next(image_files)
+        drawCoverPage(c, image_file)
+    except StopIteration:
+        pass
+    drawCalendarPage(c, year, month)
+
 def run(args):
 
     from reportlab.pdfbase import pdfmetrics
@@ -536,6 +545,10 @@ file COPYING for details.''')
                              'default, it will be named like YYYY-MM.pdf.')
     parser.add_argument('--cover-image', type=str, metavar='FILENAME', nargs='?',
                         help='Generate a cover page using the specified image.')
+    parser.add_argument('--monthly-image-dir', type=str, metavar='DIRECTORY', nargs='?',
+                        help='Generate an opposing page for each month, with '
+                             'an image taken by cycling through the files of '
+                             'the specified directory in alphabetical order.')
 
     args = parser.parse_args()
 
@@ -566,28 +579,46 @@ file COPYING for details.''')
         fname = args.filename
     else:
         fname = args.year + '-' + args.month + '.pdf'
-    
+
+    #    
     # Draw the calendar
+    #
+
+    # Initialize PDF output
     c = Canvas(fname, pagesize=landscape(A4))
     c.setCreator("PyCalendarGen 0.9.4 - bitbucket.org/jwarlander/pycalendargen")
     year = int(args.year)
     month = args.month
+
+    # Draw cover page
     if args.cover_image is not None:
       drawCoverPage(c, args.cover_image)
+
+    # Set up iterator for monthly images
+    image_files = []
+    if args.monthly_image_dir is not None:
+      print args.monthly_image_dir
+      image_dir = args.monthly_image_dir
+      image_files = [os.path.join(image_dir, f) for f in os.listdir(image_dir) 
+                     if os.path.isfile(os.path.join(image_dir, f))]
+      print image_files
+    image_files = itertools.cycle(image_files)
+
+    # Draw monthly page(s)
     if len(month.split('-')) > 1:
         start = int(month.split('-')[0])
         end = int(month.split('-')[1])
         if end < start:
             for m in range(12-start+1):
-                drawCalendarPage(c, year, start+m)
+                drawMonth(c, year, start+m, image_files)
             for m in range(end):
-                drawCalendarPage(c, year+1, 1+m)
+                drawMonth(c, year+1, 1+m, image_files)
         else:
             for m in range(end-start+1):
-                drawCalendarPage(c, year, start+m)
+                drawMonth(c, year, start+m, image_files)
     else:
         month = int(month)
-        drawCalendarPage(c, year, month)
+        drawMonth(c, year, month, image_files)
             
     c.save()
 
