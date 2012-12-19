@@ -73,8 +73,6 @@
 #  o Make command-line args more sane
 #    - YYYYMM for single month; YYYYMM-YYYYMM for an arbitrary range
 #    - or maybe --from YYYYMM / --to YYYYMM for ranges?
-#  o Add a debug flag
-#    - use for printing font info, it really isn't interesting most of the time
 #
 # ChangeLog
 # =========
@@ -546,6 +544,8 @@ file COPYING for details.''')
                         help='Generate an opposing page for each month, with '
                              'an image taken by cycling through the files of '
                              'the specified directory in alphabetical order.')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='Verbose output.')
 
     args = parser.parse_args()
 
@@ -555,8 +555,9 @@ file COPYING for details.''')
     for font in fontmap:
         try:
           addMapping(font[0], font[1], font[2], font[3])
-          print font
-          print "added."
+          if args.verbose:
+            print font
+            print "added."
         except Exception, e:
           print "Error adding Font:"
           print e
