@@ -61,11 +61,8 @@
 #  o Possibly move day_table functionality directly to data file being loaded
 #  o Command-line option for setting language
 #  o Packages for common Linux distributions
-#  o Allow rendering of single PDF for the full year (or any span of months)
-#  o Integrate rendering of opposite pages with images
-#    - refer to directory, pick image files in alphabetical order
-#    - scale images to full page, optionally with border
-#    - allow for captions, possibly using <image_name>.txt as input
+#  o Allow for image captions on monthly pages
+#    - possibly using <image_name>.txt as input
 #  o Improve font handling
 #    - command-line option for selecting font(s)?
 #    - maybe allow for usage of system fonts
