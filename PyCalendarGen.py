@@ -61,19 +61,23 @@
 #  o Possibly move day_table functionality directly to data file being loaded
 #  o Command-line option for setting language
 #  o Packages for common Linux distributions
-#  o Allow rendering of single PDF for the full year (or any span of months)
-#  o Integrate rendering of opposite pages with images
-#    - refer to directory, pick image files in alphabetical order
-#    - scale images to full page, optionally with border
-#    - allow for captions, possibly using <image_name>.txt as input
+#  o Allow for image captions on monthly pages
+#    - possibly using <image_name>.txt as input
 #  o Improve font handling
 #    - command-line option for selecting font(s)?
 #    - maybe allow for usage of system fonts
 #  o Allow specification of a config file for all rendering options
 #    - language, fonts, images etc..
+#  o Use PyEphem for calculating moon phases, dates for solstice / equinox, etc?
+#    - http://rhodesmill.org/pyephem/index.html
+#  o Make command-line args more sane
+#    - YYYYMM for single month; YYYYMM-YYYYMM for an arbitrary range
+#    - or maybe --from YYYYMM / --to YYYYMM for ranges?
 #
 # ChangeLog
 # =========
+import argparse
+import itertools
 import os
 import sys
 import reportlab.pdfgen.canvas
@@ -445,6 +449,25 @@ def drawGrid(c, year, month, width, height):
     c.restoreState()
 
 
+# drawCoverPage()
+#
+# Draw the cover page.
+#
+def drawCoverPage(c, filename):
+    width = landscape(A4)[0] - 20*mm
+    height = landscape(A4)[1] - 20*mm
+
+    # leave 1cm margin on page
+    drawable_h = height - titlesize - 5*mm
+
+    # draw image
+    c.drawImage(filename, 10*mm, 10*mm, width=width, height=height,
+                preserveAspectRatio=True)
+
+    # show the page
+    c.showPage()
+
+    
 # drawCalendarPage()
 #
 # Draw the entire calendar page.
@@ -481,38 +504,60 @@ def drawCalendarPage(c, year, month):
     return
 
 
-def usage():
-    print "Usage: " + sys.argv[0] + " year month [filename]"
-    print "Generate a calendar page in PDF format."
-    print
-    print "        year  The 4-digit year for the calendar page, like 2006."
-    print "       month  The number of the month you want to generate a page for,"
-    print "              like 05 for May."
-    print "    filename  The name of the PDF file to be written."
-    print "              By default, it will be called YYYY-MM.pdf,"
-    print "              where YYYY is replaced by the year and MM"
-    print "              is replaced by the month number."
-    print
-    print """PyCalendarGen 0.9.4, Copyright (C) 2005-2012 Johan Wärlander
-PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is
-free software, and you are welcome to redistribute it
-under certain conditions. See the file COPYING for details."""
+def drawMonth(c, year, month, image_files):
+    try:
+        image_file = next(image_files)
+        drawCoverPage(c, image_file)
+    except StopIteration:
+        pass
+    drawCalendarPage(c, year, month)
 
-    
 def run(args):
 
     from reportlab.pdfbase import pdfmetrics
     from reportlab.pdfbase.ttfonts import TTFont
     from reportlab.lib.fonts import addMapping
-   
+
+    # Process args
+    parser = argparse.ArgumentParser(
+      formatter_class=argparse.RawDescriptionHelpFormatter,
+      description='Generate calendar pages in PDF format.',
+      epilog='''PyCalendarGen 0.9.5, Copyright (C) 2005-2012 Johan Wärlander
+PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is free software,
+and you are welcome to redistribute it under certain conditions. See the 
+file COPYING for details.''')
+    parser.add_argument('year', type=str, metavar='YYYY',
+                        help='The 4-digit starting year for the calendar '
+                             'page, like 2012.')
+    parser.add_argument('month', type=str, metavar='MM[-NN]',
+                        help='The number of the month you want to generate '
+                             'a page for, like 05 for May. If of the format '
+                             'MM-NN, it describes a range of up to 12 months. '
+                             'In this case, if NN < MM, it means the calendar '
+                             'wraps into month NN of the next year.')
+    parser.add_argument('filename', type=str, nargs='?',
+                        help='The name of the PDF file to be written. By '
+                             'default, it will be named like YYYY-MM.pdf.')
+    parser.add_argument('--cover-image', type=str, metavar='FILENAME', nargs='?',
+                        help='Generate a cover page using the specified image.')
+    parser.add_argument('--monthly-image-dir', type=str, metavar='DIRECTORY', nargs='?',
+                        help='Generate an opposing page for each month, with '
+                             'an image taken by cycling through the files of '
+                             'the specified directory in alphabetical order.')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='Verbose output.')
+
+    args = parser.parse_args()
+
     # Load fonts 
     for spec in fonttable:
         pdfmetrics.registerFont(TTFont(spec[0], spec[1]))
     for font in fontmap:
         try:
           addMapping(font[0], font[1], font[2], font[3])
-          print font
-          print "added."
+          if args.verbose:
+            print font
+            print "added."
         except Exception, e:
           print "Error adding Font:"
           print e
@@ -527,38 +572,52 @@ def run(args):
             ypos += 24
             c.save()
         
-    # Process args
-    if len(args) == 4:
-        fname = args[3]
+    # Handle filename
+    if args.filename is not None:
+        fname = args.filename
     else:
-        fname = args[1] + '-' + args[2] + '.pdf'
-    
+        fname = args.year + '-' + args.month + '.pdf'
+
+    #    
     # Draw the calendar
+    #
+
+    # Initialize PDF output
     c = Canvas(fname, pagesize=landscape(A4))
-    c.setCreator("PyCalendarGen 0.9.4 - bitbucket.org/jwarlander/pycalendargen")
-    year = int(args[1])
-    month = args[2]
+    c.setCreator("PyCalendarGen 0.9.5 - github.com/jwarlander/pycalendargen")
+    year = int(args.year)
+    month = args.month
+
+    # Draw cover page
+    if args.cover_image is not None:
+      drawCoverPage(c, args.cover_image)
+
+    # Set up iterator for monthly images
+    image_files = []
+    if args.monthly_image_dir is not None:
+      image_dir = args.monthly_image_dir
+      image_files = [os.path.join(image_dir, f) for f in os.listdir(image_dir) 
+                     if os.path.isfile(os.path.join(image_dir, f))]
+    image_files = itertools.cycle(image_files)
+
+    # Draw monthly page(s)
     if len(month.split('-')) > 1:
         start = int(month.split('-')[0])
         end = int(month.split('-')[1])
         if end < start:
             for m in range(12-start+1):
-                drawCalendarPage(c, year, start+m)
+                drawMonth(c, year, start+m, image_files)
             for m in range(end):
-                drawCalendarPage(c, year+1, 1+m)
+                drawMonth(c, year+1, 1+m, image_files)
         else:
             for m in range(end-start+1):
-                drawCalendarPage(c, year, start+m)
+                drawMonth(c, year, start+m, image_files)
     else:
         month = int(month)
-        drawCalendarPage(c, year, month)
+        drawMonth(c, year, month, image_files)
             
     c.save()
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 3:
-        usage()
-        sys.exit(2)
-        
     run(sys.argv)

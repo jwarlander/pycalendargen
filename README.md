@@ -1,23 +1,26 @@
-o---------------------------------------------------------------o
-| PyCalendarGen 0.9.4 - Copyright (C) 2005-2012 Johan Warlander |
-o---------------------------------------------------------------o
+PyCalendarGen 0.9.5
+===================
+
+Copyright (C) 2005-2012 Johan Warlander
+
+[![Build Status](https://travis-ci.org/jwarlander/pycalendargen.png)](https://travis-ci.org/jwarlander/pycalendargen)
 
 Purpose
-=======
+-------
 
 PyCalendarGen generates calendar pages for use in, for example, a
 photo calendar.
 
 
 Installation
-============
+------------
 
 Just unpack the archive somewhere useful, and run PyCalendarGen.py
 from the installation directory (so it will find the fonts).
 
 
 Disclaimer
-==========
+----------
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -35,7 +38,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
 Contact
-=======
+-------
 
 Johan Warlander
 jwarlander@users.sourceforge.net
