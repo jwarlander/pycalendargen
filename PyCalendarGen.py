@@ -61,11 +61,8 @@
 #  o Possibly move day_table functionality directly to data file being loaded
 #  o Command-line option for setting language
 #  o Packages for common Linux distributions
-#  o Allow rendering of single PDF for the full year (or any span of months)
-#  o Integrate rendering of opposite pages with images
-#    - refer to directory, pick image files in alphabetical order
-#    - scale images to full page, optionally with border
-#    - allow for captions, possibly using <image_name>.txt as input
+#  o Allow for image captions on monthly pages
+#    - possibly using <image_name>.txt as input
 #  o Improve font handling
 #    - command-line option for selecting font(s)?
 #    - maybe allow for usage of system fonts
@@ -76,8 +73,6 @@
 #  o Make command-line args more sane
 #    - YYYYMM for single month; YYYYMM-YYYYMM for an arbitrary range
 #    - or maybe --from YYYYMM / --to YYYYMM for ranges?
-#  o Add a debug flag
-#    - use for printing font info, it really isn't interesting most of the time
 #
 # ChangeLog
 # =========
@@ -527,7 +522,7 @@ def run(args):
     parser = argparse.ArgumentParser(
       formatter_class=argparse.RawDescriptionHelpFormatter,
       description='Generate calendar pages in PDF format.',
-      epilog='''PyCalendarGen 0.9.4, Copyright (C) 2005-2012 Johan Wärlander
+      epilog='''PyCalendarGen 0.9.5, Copyright (C) 2005-2012 Johan Wärlander
 PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is free software,
 and you are welcome to redistribute it under certain conditions. See the 
 file COPYING for details.''')
@@ -549,6 +544,8 @@ file COPYING for details.''')
                         help='Generate an opposing page for each month, with '
                              'an image taken by cycling through the files of '
                              'the specified directory in alphabetical order.')
+    parser.add_argument('-v', '--verbose', action='store_true',
+                        help='Verbose output.')
 
     args = parser.parse_args()
 
@@ -558,8 +555,9 @@ file COPYING for details.''')
     for font in fontmap:
         try:
           addMapping(font[0], font[1], font[2], font[3])
-          print font
-          print "added."
+          if args.verbose:
+            print font
+            print "added."
         except Exception, e:
           print "Error adding Font:"
           print e
@@ -586,7 +584,7 @@ file COPYING for details.''')
 
     # Initialize PDF output
     c = Canvas(fname, pagesize=landscape(A4))
-    c.setCreator("PyCalendarGen 0.9.4 - bitbucket.org/jwarlander/pycalendargen")
+    c.setCreator("PyCalendarGen 0.9.5 - github.com/jwarlander/pycalendargen")
     year = int(args.year)
     month = args.month
 
@@ -597,11 +595,9 @@ file COPYING for details.''')
     # Set up iterator for monthly images
     image_files = []
     if args.monthly_image_dir is not None:
-      print args.monthly_image_dir
       image_dir = args.monthly_image_dir
       image_files = [os.path.join(image_dir, f) for f in os.listdir(image_dir) 
                      if os.path.isfile(os.path.join(image_dir, f))]
-      print image_files
     image_files = itertools.cycle(image_files)
 
     # Draw monthly page(s)

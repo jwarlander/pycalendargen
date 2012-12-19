@@ -1,4 +1,4 @@
-PyCalendarGen 0.9.4
+PyCalendarGen 0.9.5
 ===================
 
 Copyright (C) 2005-2012 Johan Warlander

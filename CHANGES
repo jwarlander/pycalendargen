@@ -1,6 +1,15 @@
 Release Notes for PyCalendarGen
 ===============================
 
+0.9.5
+-----
+There is now support for generating a cover page with a specified image,
+as well as an opposing page for each month with an image taken from a
+specified directory. Also, if on a supported platform, requirements can
+now be installed simply by issuing 'pip install -r requirements.txt'.
+
+Johan Warlander 2012-12-19
+
 0.9.4
 -----
 Adding dates for spring / autumn equinox and summer / winter solstice until
