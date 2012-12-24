@@ -391,7 +391,9 @@ def drawGrid(c, year, month, width, height):
     c.setFillColor(weekdaycolor)
     c.setFont(dayfont, daysize)
     for day in range(7):
-        c.drawString(0 + day * grid_w, height - daysize, weekdays[lang][day])
+        weekday = calendar.firstweekday() + day
+        c.drawString(0 + day * grid_w, height - daysize,
+                     weekdays[lang][weekday % 7])
     c.restoreState()
 
     # day grid, set 0,0 = lower left corner of upper left grid position
@@ -544,6 +546,9 @@ file COPYING for details.''')
                         help='Generate an opposing page for each month, with '
                              'an image taken by cycling through the files of '
                              'the specified directory in alphabetical order.')
+    parser.add_argument('--first-weekday', type=int, metavar='N',
+                        help='Set the starting day of week, from 0 (Monday) '
+                             'to 6 (Sunday).')
     parser.add_argument('-v', '--verbose', action='store_true',
                         help='Verbose output.')
 
@@ -587,6 +592,10 @@ file COPYING for details.''')
     c.setCreator("PyCalendarGen 0.9.5 - github.com/jwarlander/pycalendargen")
     year = int(args.year)
     month = args.month
+
+    # Set up starting day of week
+    if args.first_weekday is not None:
+        calendar.setfirstweekday(args.first_weekday)
 
     # Draw cover page
     if args.cover_image is not None:
