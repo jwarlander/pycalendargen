@@ -507,11 +507,14 @@ def drawCalendarPage(c, year, month):
 
 
 def drawMonth(c, year, month, image_files):
+    # If we have any image files to use, draw an opposing page for the
+    # month, with the next available image.
     try:
         image_file = next(image_files)
         drawCoverPage(c, image_file)
     except StopIteration:
         pass
+    # Draw the calendar page for the month.
     drawCalendarPage(c, year, month)
 
 def run(args):
