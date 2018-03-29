@@ -223,8 +223,8 @@ def loadDays(funs, lang):
     except IOError:
         print "Warning: Unable to open " + fname + ", skipping."
         return res
-    
-    
+
+
     for line in f.readlines():
         # format: month.day color_code:Text..
         line = line.strip(' \t\n\r')
@@ -236,13 +236,13 @@ def loadDays(funs, lang):
             date = day[0].split('.')
         else: # go to call table
             date = funs[day[0][0]](day[0][1:])
-            
+
         what = ' '.join(day[1:])
 
         for part in what.split('/'):
             part = part.strip()
             style = 0
-            
+
             if len(part.split(':')) > 1:
                 style,part = part.split(':')
 
@@ -250,7 +250,7 @@ def loadDays(funs, lang):
                         int(style), part.encode('utf-8')])
 
     return res
-    
+
 
 # drawHeader()
 #
@@ -266,7 +266,7 @@ def drawHeader(c, year, month, width, height, lang):
     c.drawString(width - (year_width+15), 0, str(year))
 
     c.restoreState()
-    
+
 
 # drawGrid()
 #
@@ -307,7 +307,7 @@ def drawGrid(c, year, month, width, height, lang):
         style.fontSize = itemsize
         style.textColor = col['color']
         styles.append(style)
-    
+
     c.saveState()
 
     grid_h = (height - daysize - 5*mm) / 6
@@ -321,7 +321,7 @@ def drawGrid(c, year, month, width, height, lang):
         nw = c.stringWidth(str(n+1), numfont, numsize)
         if nw > num_w:
             num_w = nw
-            
+
     # week names
     c.saveState()
     c.setFillColor(weekdaycolor)
@@ -340,17 +340,17 @@ def drawGrid(c, year, month, width, height, lang):
         for day in week:
             if day > 0:
                 isred = False
-                
+
                 # calculate lower left corner for this day
                 x = pos % 7 * grid_w
                 y = 0 - pos / 7 * grid_h
 
                 # paint a rounded rectangle
-		c.saveState()
+                c.saveState()
                 c.setStrokeColor(dayboxfgcolor)
                 c.setFillColor(dayboxbgcolor)
                 c.roundRect(x, y, grid_w - gridspace, grid_h - gridspace, gridspace, fill=1)
-		c.restoreState()
+                c.restoreState()
 
                 # handle special days
                 items = []
@@ -372,7 +372,7 @@ def drawGrid(c, year, month, width, height, lang):
                     f = Frame(fx, fy, fw, fh, leftPadding=0, rightPadding=0,
                               topPadding=0, bottomPadding=0, showBoundary=0)
                     f.addFromList(items, c)
-                    
+
                 # set color if red day
                 if isred or calendar.weekday(year, month, day) == 6:
                     c.setFillColor(colortable[1]['color'])
@@ -405,7 +405,7 @@ def drawCoverPage(c, filename):
     # show the page
     c.showPage()
 
-    
+
 # drawCalendarPage()
 #
 # Draw the entire calendar page.
@@ -417,7 +417,7 @@ def drawCalendarPage(c, year, month, lang):
     # leave 1cm margin on page
     drawable_h = height - titlesize - 5*mm
     c.translate(10*mm, 10*mm)
-    
+
     # draw rounded background rect
     c.saveState()
     c.setStrokeColor(framefgcolor)
@@ -427,7 +427,7 @@ def drawCalendarPage(c, year, month, lang):
 
     # place header 5mm from the left/right border sides
     c.saveState()
-    c.translate(5*mm, height - titlesize) 
+    c.translate(5*mm, height - titlesize)
     drawHeader(c, year, month, width - 10*mm, titlesize, lang)
     c.restoreState()
 
@@ -465,7 +465,7 @@ def run(args):
       description='Generate calendar pages in PDF format.',
       epilog='''PyCalendarGen 0.9.5, Copyright (C) 2005-2012 Johan Wärlander
 PyCalendarGen comes with ABSOLUTELY NO WARRANTY. This is free software,
-and you are welcome to redistribute it under certain conditions. See the 
+and you are welcome to redistribute it under certain conditions. See the
 file COPYING for details.''')
     parser.add_argument('year', type=str, metavar='YYYY',
                         help='The 4-digit starting year for the calendar '
@@ -501,7 +501,7 @@ file COPYING for details.''')
     if args.verbose:
         print "Setting language to '{}' ({})".format(args.language, lang)
 
-    # Load fonts 
+    # Load fonts
     for spec in fonttable:
         pdfmetrics.registerFont(TTFont(spec[0], spec[1]))
     for font in fontmap:
@@ -513,7 +513,7 @@ file COPYING for details.''')
         except Exception, e:
           print "Error adding Font:"
           print e
-        
+
     # Font test page
     if 0:
         c = Canvas("fonts.pdf", pagesize=portrait(A4))
@@ -523,14 +523,14 @@ file COPYING for details.''')
             c.drawString(100, ypos, font[0])
             ypos += 24
             c.save()
-        
+
     # Handle filename
     if args.filename is not None:
         fname = args.filename
     else:
         fname = args.year + '-' + args.month + '.pdf'
 
-    #    
+    #
     # Draw the calendar
     #
 
@@ -552,7 +552,7 @@ file COPYING for details.''')
     image_files = []
     if args.monthly_image_dir is not None:
       image_dir = args.monthly_image_dir
-      image_files = [os.path.join(image_dir, f) for f in os.listdir(image_dir) 
+      image_files = [os.path.join(image_dir, f) for f in os.listdir(image_dir)
                      if os.path.isfile(os.path.join(image_dir, f))]
     image_files = itertools.cycle(image_files)
 
@@ -571,7 +571,7 @@ file COPYING for details.''')
     else:
         month = int(month)
         drawMonth(c, year, month, image_files, lang)
-            
+
     c.save()
 
 
