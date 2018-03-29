@@ -1,7 +1,6 @@
 language: python
 python:
   - "2.7"
-  - "2.6"
 # make sure we have comparepdf available
 before_install:
  - sudo apt-get install -qq imagemagick ghostscript
