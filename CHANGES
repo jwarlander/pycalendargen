@@ -1,6 +1,12 @@
 Release Notes for PyCalendarGen
 ===============================
 
+0.9.6-dev
+---------
+
+- command-line option for selecting language
+- replace hard-coded solstice / equinox dates with PyEphem calculations
+
 0.9.5
 -----
 There is now support for generating a cover page with a specified image,

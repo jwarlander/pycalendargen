@@ -58,7 +58,6 @@
 #      that is filled out like this:
 #        (day_number, day_color, ((item_name, item_color), (item_name, item_color), ..))
 #    - this means renderGrid() will ONLY need to worry about how to -display- the data
-#  o Possibly move day_table functionality directly to data file being loaded
 #  o Packages for common Linux distributions
 #  o Allow for image captions on monthly pages
 #    - possibly using <image_name>.txt as input
@@ -76,17 +75,18 @@
 # ChangeLog
 # =========
 import argparse
+import calendar
+import ephem
 import itertools
 import os
-import sys
 import reportlab.pdfgen.canvas
+import sys
 from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib import colors
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.lib.pagesizes import A4, landscape
 from reportlab.platypus import Paragraph, Frame
-import calendar
 from mx.DateTime import *
 
 #
@@ -202,79 +202,6 @@ colortable = [
     {'color': colors.black, 'italic': True,  'bold': False},  # 3
     ]
 
-# This table contains dates for special days that can't (?) be calculated.
-# Used from the special days data file, like "Tse" instead of "20.3" for date.
-day_table = {
-    # Spring Equinox
-    "se": {
-    2005: (20,  3),
-    2006: (20,  3),
-    2007: (21,  3),
-    2008: (20,  3),
-    2009: (20,  3),
-    2010: (20,  3),
-    2011: (20,  3),
-    2012: (20,  3),
-    2013: (20,  3),
-    2014: (20,  3),
-    2015: (20,  3),
-    2016: (20,  3),
-    2017: (20,  3),
-    2018: (20,  3),
-    },
-    # Summer Solstice
-    "ss": {
-    2005: (21,  6),
-    2006: (21,  6),
-    2007: (21,  6),
-    2008: (21,  6),
-    2009: (21,  6),
-    2010: (21,  6),
-    2011: (21,  6),
-    2012: (20,  6),
-    2013: (21,  6),
-    2014: (21,  6),
-    2015: (21,  6),
-    2016: (20,  6),
-    2017: (21,  6),
-    2018: (21,  6),
-    },
-    # Autumn Equinox
-    "ae": {
-    2005: (22,  9),
-    2006: (23,  9),
-    2007: (23,  9),
-    2008: (22,  9),
-    2009: (22,  9),
-    2010: (23,  9),
-    2011: (23,  9),
-    2012: (22,  9),
-    2013: (22,  9),
-    2014: (23,  9),
-    2015: (23,  9),
-    2016: (22,  9),
-    2017: (22,  9),
-    2018: (23,  9),
-    },
-    # Winter Solstice
-    "ws": {
-    2005: (21, 12),
-    2006: (22, 12),
-    2007: (22, 12),
-    2008: (21, 12),
-    2009: (21, 12),
-    2010: (21, 12),
-    2011: (22, 12),
-    2012: (21, 12),
-    2013: (21, 12),
-    2014: (21, 12),
-    2015: (22, 12),
-    2016: (21, 12),
-    2017: (21, 12),
-    2018: (21, 12),
-    },
-    }
-
 # ----------------------------------------------------------------------------
 
 # loadDays()
@@ -350,12 +277,22 @@ def drawGrid(c, year, month, width, height, lang):
     def easter(diff):
         d = Feasts.EasterSunday(year) + RelativeDateTime(days=int(diff))
         return d.tuple()[2], d.tuple()[1]
-    # fetch date from per-year table, for specified code
+    # calculate date using PyEphem for specified code
     #   se = spring equinox, ss = summer solstice,
     #   ae = autumn equinox, ws = winter solstice
-    def table(what):
-        return day_table[what][year]
-    
+    def table(code):
+        if code == 'se':
+            return ephem.next_spring_equinox(str(year)).tuple()[2:0:-1]
+        elif code == 'ss':
+            return ephem.next_summer_solstice(str(year)).tuple()[2:0:-1]
+        elif code == 'ae':
+            return ephem.next_autumn_equinox(str(year)).tuple()[2:0:-1]
+        elif code == 'ws':
+            return ephem.next_winter_solstice(str(year)).tuple()[2:0:-1]
+        else:
+            print "ERROR: Invalid date code: {} (should be one of [se,ss,ae,ws])".format(code)
+            sys.exit(1)
+
     reddays = loadDays({
         "E": easter,
         "T": table,
