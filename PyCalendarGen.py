@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#   PyCalendarGen.py - Copyright (C) 2005-2012 Johan Wärlander
+#   PyCalendarGen.py - Copyright (C) 2005-2018 Johan Wärlander
 #
 #   This file is part of PyCalendarGen.
 #
@@ -24,7 +24,7 @@
 #
 # The program loads special days like holidays, namedays, birthdays etc
 # from a file called "days_[lang].txt". For example, the language code
-# for English (American) is enA, so the file would be "days_enA.txt".
+# for English (American) is `enUS`, so the file would be "days_enUS.txt".
 #
 # This file MUST be in UTF-8 if it contains non-ASCII characters, and
 # has the following format:
@@ -59,7 +59,6 @@
 #        (day_number, day_color, ((item_name, item_color), (item_name, item_color), ..))
 #    - this means renderGrid() will ONLY need to worry about how to -display- the data
 #  o Possibly move day_table functionality directly to data file being loaded
-#  o Command-line option for setting language
 #  o Packages for common Linux distributions
 #  o Allow for image captions on monthly pages
 #    - possibly using <image_name>.txt as input
@@ -140,7 +139,7 @@ fontmap = [
 #   1 = English (US)
 #   2 = German
 #   3 = Catalan
-lang = 1
+DEFAULT_LANG = 1
 
 # Page titles
 titlefont = 'Bitstream Vera'
@@ -287,7 +286,7 @@ day_table = {
 #                  like "E-10 Some Holiday", we would make the
 #                  following call: easter("-10")
 #
-def loadDays(funs):
+def loadDays(funs, lang):
     import codecs
     fname = 'days_' + languages[lang] + '.txt'
     res = []
@@ -330,7 +329,7 @@ def loadDays(funs):
 #
 # Draw the calendar page header.
 #
-def drawHeader(c, year, month, width, height):
+def drawHeader(c, year, month, width, height, lang):
     c.saveState()
 
     c.setFillColor(titlecolor)
@@ -346,7 +345,7 @@ def drawHeader(c, year, month, width, height):
 #
 # Draw the calendar grid and all its contents.
 #
-def drawGrid(c, year, month, width, height):
+def drawGrid(c, year, month, width, height, lang):
     # return date for easter + diff, negative = before easter
     def easter(diff):
         d = Feasts.EasterSunday(year) + RelativeDateTime(days=int(diff))
@@ -360,7 +359,7 @@ def drawGrid(c, year, month, width, height):
     reddays = loadDays({
         "E": easter,
         "T": table,
-        })
+        }, lang)
     gridspace = 2*mm
 
     # set up special day item styles
@@ -474,7 +473,7 @@ def drawCoverPage(c, filename):
 #
 # Draw the entire calendar page.
 #
-def drawCalendarPage(c, year, month):
+def drawCalendarPage(c, year, month, lang):
     width = landscape(A4)[0] - 20*mm
     height = landscape(A4)[1] - 20*mm
 
@@ -492,13 +491,13 @@ def drawCalendarPage(c, year, month):
     # place header 5mm from the left/right border sides
     c.saveState()
     c.translate(5*mm, height - titlesize) 
-    drawHeader(c, year, month, width - 10*mm, titlesize)
+    drawHeader(c, year, month, width - 10*mm, titlesize, lang)
     c.restoreState()
 
     # draw grid with a 5mm margin to the border
     c.saveState()
     c.translate(5*mm, 5*mm)
-    drawGrid(c, year, month, width - 10*mm, drawable_h - 10*mm)
+    drawGrid(c, year, month, width - 10*mm, drawable_h - 10*mm, lang)
     c.restoreState()
 
     # show the page
@@ -506,7 +505,7 @@ def drawCalendarPage(c, year, month):
     return
 
 
-def drawMonth(c, year, month, image_files):
+def drawMonth(c, year, month, image_files, lang):
     # If we have any image files to use, draw an opposing page for the
     # month, with the next available image.
     try:
@@ -515,7 +514,7 @@ def drawMonth(c, year, month, image_files):
     except StopIteration:
         pass
     # Draw the calendar page for the month.
-    drawCalendarPage(c, year, month)
+    drawCalendarPage(c, year, month, lang)
 
 def run(args):
 
@@ -545,6 +544,9 @@ file COPYING for details.''')
                              'default, it will be named like YYYY-MM.pdf.')
     parser.add_argument('--cover-image', type=str, metavar='FILENAME', nargs='?',
                         help='Generate a cover page using the specified image.')
+    parser.add_argument('--language', type=str, choices=languages,
+                        default=languages[DEFAULT_LANG],
+                        help='Language to use for special days, holidays etc.')
     parser.add_argument('--monthly-image-dir', type=str, metavar='DIRECTORY', nargs='?',
                         help='Generate an opposing page for each month, with '
                              'an image taken by cycling through the files of '
@@ -556,6 +558,11 @@ file COPYING for details.''')
                         help='Verbose output.')
 
     args = parser.parse_args()
+
+    # Language
+    lang = languages.index(args.language)
+    if args.verbose:
+        print "Setting language to '{}' ({})".format(args.language, lang)
 
     # Load fonts 
     for spec in fonttable:
@@ -618,15 +625,15 @@ file COPYING for details.''')
         end = int(month.split('-')[1])
         if end < start:
             for m in range(12-start+1):
-                drawMonth(c, year, start+m, image_files)
+                drawMonth(c, year, start+m, image_files, lang)
             for m in range(end):
-                drawMonth(c, year+1, 1+m, image_files)
+                drawMonth(c, year+1, 1+m, image_files, lang)
         else:
             for m in range(end-start+1):
-                drawMonth(c, year, start+m, image_files)
+                drawMonth(c, year, start+m, image_files, lang)
     else:
         month = int(month)
-        drawMonth(c, year, month, image_files)
+        drawMonth(c, year, month, image_files, lang)
             
     c.save()
 
