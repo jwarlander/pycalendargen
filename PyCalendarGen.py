@@ -19,37 +19,6 @@
 #   along with PyCalendarGen; if not, write to the Free Software
 #   Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #
-#
-# Generate calendar in PDF format.
-#
-# The program loads special days like holidays, namedays, birthdays etc
-# from a file called "days_[lang].txt". For example, the language code
-# for English (American) is `enUS`, so the file would be "days_enUS.txt".
-#
-# This file MUST be in UTF-8 if it contains non-ASCII characters, and
-# has the following format:
-#
-#   DD.MM [color:]Text to appear [ / [color:]Additional line for same day ]
-#
-# Examples:
-#
-#   25.3 John's Birthday
-#    -> would show in black, as a single entry, for March 25
-#   25.3 John's Birthday / Start of vacation!
-#    -> would show in black, as two entries below each other, for March 25
-#   25.3 2:John's Birthday / Start of vacation!
-#    -> would display John's Birthday in cyan (color code 2), and then on
-#       the next line Start of vacation! in black
-#   25.3 1:John's Birthday
-#    -> would display John's Birthday in red (color code 1), and make March
-#       25 a red day on the calendar page. This is how holidays are tagged
-#       in the special day file.
-#
-# Dependencies
-# ============
-#  o ReportLab (http://www.reportlab.org/)
-#  o eGenix mxDateTime (http://www.egenix.com/)
-#
 # TODO
 # ====
 #  o Improve calendar rendering structure to allow for styles
@@ -66,14 +35,12 @@
 #    - maybe allow for usage of system fonts
 #  o Allow specification of a config file for all rendering options
 #    - language, fonts, images etc..
-#  o Use PyEphem for calculating moon phases, dates for solstice / equinox, etc?
-#    - http://rhodesmill.org/pyephem/index.html
+#  o Use PyEphem for calculating moon phases, so they can be displayed symbolically?
+#    - it's already a dependency anyway; http://rhodesmill.org/pyephem/index.html
 #  o Make command-line args more sane
 #    - YYYYMM for single month; YYYYMM-YYYYMM for an arbitrary range
 #    - or maybe --from YYYYMM / --to YYYYMM for ranges?
 #
-# ChangeLog
-# =========
 import argparse
 import calendar
 import ephem
